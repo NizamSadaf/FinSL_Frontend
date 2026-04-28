@@ -93,73 +93,74 @@ export default function App() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "system-ui" }}>
-      <h1>Sign Recognition UI</h1>
+   <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "system-ui", background: "#000", color: "#fff", padding: 20, borderRadius: 12 }}>
+  <h1>Sign Recognition UI</h1>
 
-      <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 12 }}>
-        <label style={{ display: "block", marginBottom: 8 }}>
-          Upload a short sign video:
-        </label>
+  <div style={{ padding: 16, border: "1px solid #444", borderRadius: 12 }}>
+    <label style={{ display: "block", marginBottom: 8 }}>
+      Upload a short sign video:
+    </label>
 
-        <input type="file" accept="video/*" onChange={onFileChange} />
+    <input type="file" accept="video/*" onChange={onFileChange} style={{ color: "#fff" }} />
 
-        {previewUrl && (
-          <div style={{ marginTop: 16 }}>
-            <video
-              src={previewUrl}
-              controls
-              style={{ width: "100%", borderRadius: 12 }}
-            />
-          </div>
-        )}
-
-        <button
-          onClick={onPredict}
-          disabled={busy || !file}
-          style={{
-            marginTop: 16,
-            padding: "10px 14px",
-            borderRadius: 10,
-            border: "1px solid #333",
-            background: busy ? "#eee" : "#fff",
-            cursor: busy ? "not-allowed" : "pointer",
-          }}
-        >
-          {busy ? "Predicting..." : "Predict"}
-        </button>
-
-        {error && (
-          <p style={{ marginTop: 12, color: "crimson" }}>
-            <b>Error:</b> {error}
-          </p>
-        )}
-
-        {result && (
-          <div
-            style={{
-              marginTop: 16,
-              padding: 12,
-              borderRadius: 12,
-              background: "#f6f6f6",
-            }}
-          >
-            <h3 style={{ marginTop: 0 }}>Result</h3>
-            <p style={{ margin: 0 }}>
-              <b>Label:</b> {result.predicted_label}
-            </p>
-            <p style={{ margin: 0 }}>
-              <b>Confidence:</b>{" "}
-              {typeof result.confidence === "number"
-                ? result.confidence.toFixed(3)
-                : result.confidence}
-            </p>
-          </div>
-        )}
+    {previewUrl && (
+      <div style={{ marginTop: 16 }}>
+        <video
+          src={previewUrl}
+          controls
+          style={{ width: "100%", borderRadius: 12 }}
+        />
       </div>
+    )}
 
-      <p style={{ marginTop: 14, color: "#555" }}>
-        Backend must be running at <code>{API_BASE}</code>.
+    <button
+      onClick={onPredict}
+      disabled={busy || !file}
+      style={{
+        marginTop: 16,
+        padding: "10px 14px",
+        borderRadius: 10,
+        border: "1px solid #888",
+        background: busy ? "#333" : "#111",
+        color: "#fff",
+        cursor: busy ? "not-allowed" : "pointer",
+      }}
+    >
+      {busy ? "Predicting..." : "Predict"}
+    </button>
+
+    {error && (
+      <p style={{ marginTop: 12, color: "crimson" }}>
+        <b>Error:</b> {error}
       </p>
-    </div>
+    )}
+
+    {result && (
+      <div
+        style={{
+          marginTop: 16,
+          padding: 12,
+          borderRadius: 12,
+          background: "#111",
+        }}
+      >
+        <h3 style={{ marginTop: 0 }}>Result</h3>
+        <p style={{ margin: 0 }}>
+          <b>Label:</b> {result.predicted_label}
+        </p>
+        <p style={{ margin: 0 }}>
+          <b>Confidence:</b>{" "}
+          {typeof result.confidence === "number"
+            ? result.confidence.toFixed(3)
+            : result.confidence}
+        </p>
+      </div>
+    )}
+  </div>
+
+  <p style={{ marginTop: 14, color: "#aaa" }}>
+    Backend must be running at <code>{API_BASE}</code>.
+    </p>
+  </div>
   );
 }
